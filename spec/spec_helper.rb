@@ -87,4 +87,13 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  # Keep the spec/tmp directory clean
+  config.before(:each) do
+    FileUtils.rm_rf 'spec/tmp/.', secure: true
+  end
+
+  config.after(:each) do
+    FileUtils.rm_rf 'spec/tmp/.', secure: true
+  end
 end
