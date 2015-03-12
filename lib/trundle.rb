@@ -1,5 +1,5 @@
 require 'trundle/version'
+require 'trundle/text_bundle'
 
 module Trundle
-  # TODO: Actually make this gem...
 end
