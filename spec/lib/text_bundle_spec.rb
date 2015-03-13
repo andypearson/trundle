@@ -1,7 +1,7 @@
 RSpec.describe Trundle::TextBundle do
   let(:content) { File.read(text_bundle_path + '/text.markdown') }
   let(:text_bundle) { described_class.new(text_bundle_path) }
-  let(:text_bundle_path) { 'spec/samples/offical-example.textbundle' }
+  let(:text_bundle_path) { 'spec/samples/offical-v2.textbundle' }
 
   context 'Reading a TextBundle' do
     it 'exists' do
