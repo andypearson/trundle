@@ -2,11 +2,19 @@ class Trundle::TextBundle
   attr_reader :path
 
   def self.open(path)
-    self.new(path)
+    if block_given?
+      self.new(path, &Proc.new)
+    else
+      self.new(path)
+    end
   end
 
   def initialize(path)
     @path = path
+    if block_given?
+      yield
+      close
+    end
   end
 
   def exist?

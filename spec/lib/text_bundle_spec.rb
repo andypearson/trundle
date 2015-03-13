@@ -37,12 +37,31 @@ RSpec.describe Trundle::TextBundle do
         expect(File.exist?(text_bundle_path + '/text.markdown')).to be true
       end
     end
+
+    context 'using a block' do
+      let(:text_bundle) do
+        described_class.new(text_bundle_path) {}
+      end
+
+      it 'exists' do
+        expect(text_bundle).to exist
+      end
+    end
   end
 
   describe 'Class Methods' do
     describe '.open' do
       it 'returns an instance' do
         expect(described_class.open(text_bundle_path)).to be_a(described_class)
+      end
+
+      context 'using a block' do
+        let(:text_bundle) { described_class.open(text_bundle_path) {} }
+        let(:text_bundle_path) { 'spec/tmp/example.textbundle' }
+
+        it 'passes down to the new instance' do
+          expect(text_bundle).to exist
+        end
       end
     end
   end
