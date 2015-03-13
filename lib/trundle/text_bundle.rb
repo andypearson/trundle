@@ -1,3 +1,5 @@
+require 'json'
+
 class Trundle::TextBundle
   attr_reader :path
   attr_writer :text
@@ -26,14 +28,42 @@ class Trundle::TextBundle
     @text ||= File.read(text_path)
   end
 
+  def info
+    @info ||= JSON.parse(File.read(info_path))
+  end
+
   def close
     Dir.mkdir(path) unless exist?
     write_text
   end
 
+  def transient?
+    !!info['transient']
+  end
+
+  def version
+    info['version']
+  end
+
+  def source_url
+    info['sourceURL']
+  end
+
+  def creator_url
+    info['creatorURL']
+  end
+
+  def creator_identifier
+    info['creatorIdentifier']
+  end
+
   private
   def text_path
     @text_path ||= File.join(path, 'text.markdown')
+  end
+
+  def info_path
+    @info_path ||= File.join(path, 'info.json')
   end
 
   def write_text

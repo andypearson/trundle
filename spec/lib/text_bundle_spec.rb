@@ -10,8 +10,28 @@ RSpec.describe Trundle::TextBundle do
       expect(text_bundle).to exist
     end
 
+    it 'is transient' do
+      expect(text_bundle).to be_transient
+    end
+
     it 'reads the text content' do
       expect(text_bundle.text).to eq(content)
+    end
+
+    it 'reads the version' do
+      expect(text_bundle.version).to eq(2)
+    end
+
+    it 'reads the creator URL' do
+      expect(text_bundle.creator_url).to eq('file:///Applications/Example.app/')
+    end
+
+    it 'reads the creator identifier' do
+      expect(text_bundle.creator_identifier).to eq('com.example.editor')
+    end
+
+    it 'reads the source URL' do
+      expect(text_bundle.source_url).to eq('file:///Users/johndoe/Documents/myfile.markdown/')
     end
   end
 
