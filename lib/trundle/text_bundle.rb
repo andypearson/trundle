@@ -1,5 +1,6 @@
 class Trundle::TextBundle
   attr_reader :path
+  attr_writer :text
 
   def self.open(path)
     if block_given?
@@ -12,7 +13,7 @@ class Trundle::TextBundle
   def initialize(path)
     @path = path
     if block_given?
-      yield
+      yield(self)
       close
     end
   end
