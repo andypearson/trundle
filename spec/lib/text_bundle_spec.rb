@@ -40,6 +40,14 @@ RSpec.describe Trundle::TextBundle do
       expect(text_bundle).not_to exist
     end
 
+    it 'has no text' do
+      expect(text_bundle.text).to eq('')
+    end
+
+    it 'has no info' do
+      expect(text_bundle.info).to eq({})
+    end
+
     context 'when closed' do
       before do
         text_bundle.close
@@ -53,8 +61,12 @@ RSpec.describe Trundle::TextBundle do
         expect(File.exist?(text_bundle_path)).to be true
       end
 
-      it 'creates the text content file' do
+      it 'creates the text file' do
         expect(File.exist?(text_bundle_path + '/text.markdown')).to be true
+      end
+
+      it 'creates the info file' do
+        expect(File.exist?(text_bundle_path + '/info.json')).to be true
       end
     end
 
