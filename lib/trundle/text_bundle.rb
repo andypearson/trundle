@@ -1,9 +1,6 @@
 require 'json'
 
 class Trundle::TextBundle
-  attr_reader :path
-  attr_writer :text
-
   def self.open(path)
     if block_given?
       self.new(path, &Proc.new)
@@ -14,6 +11,8 @@ class Trundle::TextBundle
 
   def initialize(path)
     @path = path
+    @text_store = Trundle::TextStore.new(File.join(@path, 'text.markdown'))
+
     if block_given?
       yield(self)
       close
@@ -21,11 +20,15 @@ class Trundle::TextBundle
   end
 
   def exist?
-    File.exist?(path)
+    File.exist?(@path)
   end
 
   def text
-    @text ||= File.read(text_path)
+    @text_store.content
+  end
+
+  def text=(value)
+    @text_store.content = value
   end
 
   def info
@@ -33,8 +36,8 @@ class Trundle::TextBundle
   end
 
   def close
-    Dir.mkdir(path) unless exist?
-    write_text
+    Dir.mkdir(@path) unless exist?
+    @text_store.write
   end
 
   def transient?
@@ -58,17 +61,7 @@ class Trundle::TextBundle
   end
 
   private
-  def text_path
-    @text_path ||= File.join(path, 'text.markdown')
-  end
-
   def info_path
-    @info_path ||= File.join(path, 'info.json')
-  end
-
-  def write_text
-    File.open(text_path, 'w') do |file|
-      file.write(text)
-    end
+    @info_path ||= File.join(@path, 'info.json')
   end
 end
