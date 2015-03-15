@@ -1,5 +1,3 @@
-require 'json'
-
 class Trundle::TextBundle
   def self.open(path)
     if block_given?
@@ -11,6 +9,7 @@ class Trundle::TextBundle
 
   def initialize(path)
     @path = path
+    @info_store = Trundle::InfoStore.new(File.join(@path, 'info.json'))
     @text_store = Trundle::TextStore.new(File.join(@path, 'text.markdown'))
 
     if block_given?
@@ -32,11 +31,12 @@ class Trundle::TextBundle
   end
 
   def info
-    @info ||= JSON.parse(File.read(info_path))
+    @info_store.content
   end
 
   def close
     Dir.mkdir(@path) unless exist?
+    @info_store.write
     @text_store.write
   end
 

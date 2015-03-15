@@ -13,7 +13,7 @@ class Trundle::TextStore
 
   def write
     File.open(@path, 'w') do |file|
-      file.write(@content)
+      file.write(content)
     end
   end
 end
