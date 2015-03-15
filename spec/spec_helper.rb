@@ -90,10 +90,14 @@ RSpec.configure do |config|
 
   # Keep the spec/tmp directory clean
   config.before(:each) do
-    FileUtils.rm_rf 'spec/tmp/.', secure: true
+    clean_up_tmp_text_bundles
   end
 
   config.after(:each) do
-    FileUtils.rm_rf 'spec/tmp/.', secure: true
+    clean_up_tmp_text_bundles
+  end
+
+  def clean_up_tmp_text_bundles
+    FileUtils.rm_rf Dir.glob('spec/tmp/*.textbundle'), secure: true
   end
 end
