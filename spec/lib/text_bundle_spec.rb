@@ -110,5 +110,42 @@ RSpec.describe Trundle::TextBundle do
         end
       end
     end
+
+    context 'to change info' do
+      it 'changes transient to false' do
+        text_bundle.transient = false
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path)).not_to be_transient
+      end
+
+      it 'writes the version' do
+        text_bundle.version = 2
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path).version).to eq(2)
+      end
+
+      it 'reads the creator URL' do
+        text_bundle.creator_url = 'file:///Applications/Example.app/'
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path).creator_url).to eq('file:///Applications/Example.app/')
+      end
+
+      it 'reads the creator identifier' do
+        text_bundle.creator_identifier = 'com.example.editor'
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path).creator_identifier).to eq('com.example.editor')
+      end
+
+      it 'reads the source URL' do
+        text_bundle.source_url = 'file:///Users/johndoe/Documents/myfile.markdown/'
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path).source_url).to eq('file:///Users/johndoe/Documents/myfile.markdown/')
+      end
+    end
   end
 end

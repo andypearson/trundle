@@ -32,20 +32,40 @@ class Trundle::TextBundle
     @text_store.write
   end
 
+  def transient=(value)
+    !!value
+  end
+
   def transient?
     !!info['transient']
+  end
+
+  def version=(value)
+    info['version'] = value
   end
 
   def version
     info['version']
   end
 
+  def source_url=(value)
+    info['sourceURL'] = value
+  end
+
   def source_url
     info['sourceURL']
   end
 
+  def creator_url=(value)
+    info['creatorURL'] = value
+  end
+
   def creator_url
     info['creatorURL']
+  end
+
+  def creator_identifier=(value)
+    info['creatorIdentifier'] = value
   end
 
   def creator_identifier
