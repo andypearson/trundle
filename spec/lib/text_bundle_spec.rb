@@ -95,7 +95,7 @@ RSpec.describe Trundle::TextBundle do
         text_bundle.text = text
         text_bundle.close
 
-        expect(described_class.open(text_bundle_path).text).to eq(text)
+        expect(described_class.new(text_bundle_path).text).to eq(text)
       end
 
       context 'using a block' do
@@ -106,23 +106,7 @@ RSpec.describe Trundle::TextBundle do
         end
 
         it 'is written' do
-          expect(described_class.open(text_bundle_path).text).to eq(text)
-        end
-      end
-    end
-  end
-
-  describe 'Class Methods' do
-    describe '.open' do
-      it 'returns an instance' do
-        expect(described_class.open(text_bundle_path)).to be_a(described_class)
-      end
-
-      context 'using a block' do
-        let(:text_bundle) { described_class.open(text_bundle_path) {} }
-
-        it 'passes down to the new instance' do
-          expect(text_bundle).to exist
+          expect(described_class.new(text_bundle_path).text).to eq(text)
         end
       end
     end

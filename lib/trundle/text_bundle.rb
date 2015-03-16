@@ -1,12 +1,4 @@
 class Trundle::TextBundle
-  def self.open(path)
-    if block_given?
-      self.new(path, &Proc.new)
-    else
-      self.new(path)
-    end
-  end
-
   def initialize(path)
     @path = path
     @info_store = Trundle::InfoStore.new(File.join(@path, 'info.json'))

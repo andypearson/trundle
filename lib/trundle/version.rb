@@ -1,3 +1,3 @@
-module Trundle
+class Trundle
   VERSION = '0.0.0'
 end
