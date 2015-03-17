@@ -22,10 +22,6 @@ class Trundle::TextBundle
     @text_store.content = value
   end
 
-  def info
-    @info_store.content
-  end
-
   def close
     Dir.mkdir(@path) unless exist?
     @info_store.write
@@ -73,7 +69,7 @@ class Trundle::TextBundle
   end
 
   private
-  def info_path
-    @info_path ||= File.join(@path, 'info.json')
+  def info
+    @info_store.content
   end
 end

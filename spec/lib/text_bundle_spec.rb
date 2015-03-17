@@ -44,10 +44,6 @@ RSpec.describe Trundle::TextBundle do
       expect(text_bundle.text).to eq('')
     end
 
-    it 'has no info' do
-      expect(text_bundle.info).to eq({})
-    end
-
     context 'when closed' do
       before do
         text_bundle.close
