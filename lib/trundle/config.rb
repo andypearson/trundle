@@ -1,0 +1,2 @@
+class Trundle::Config
+end

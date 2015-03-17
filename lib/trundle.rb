@@ -1,8 +1,8 @@
-require 'trundle/version'
-require 'trundle/text_bundle'
-
+require 'trundle/config'
 require 'trundle/info_store'
+require 'trundle/text_bundle'
 require 'trundle/text_store'
+require 'trundle/version'
 
 class Trundle
   def self.open(path)
@@ -11,5 +11,13 @@ class Trundle
     else
       TextBundle.new(path)
     end
+  end
+
+  def self.configure
+    yield config
+  end
+
+  def self.config
+    Config.new
   end
 end
