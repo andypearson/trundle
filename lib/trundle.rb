@@ -18,6 +18,6 @@ class Trundle
   end
 
   def self.config
-    Config.new
+    @config ||= Config.new
   end
 end

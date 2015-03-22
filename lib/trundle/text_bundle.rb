@@ -28,10 +28,12 @@ class Trundle::TextBundle
     @text_store.write
   end
 
+  # TODO: raise exception when transient is not being set to a boolean
   def transient=(value)
     !!value
   end
 
+  # TODO: add a standard accessor for transient as well (for consistency)
   def transient?
     !!info['transient']
   end

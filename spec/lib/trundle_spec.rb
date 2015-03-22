@@ -15,23 +15,27 @@ RSpec.describe Trundle do
     end
   end
 
-  describe '.configure' do
-    it 'sets the version' do
-      Trundle.configure do |config|
-        config.version = 2
-      end
-      expect(Trundle.config.version).to eq(2)
+  describe '.config' do
+    it 'returns a config object' do
+      expect(Trundle.config).to be_a(Trundle::Config)
     end
 
-    it 'sets the creator URL' do
+    it 'always returns the same config object' do
+      expect(Trundle.config).to equal(Trundle.config)
+    end
+  end
+
+  describe '.configure' do
+    before do
       Trundle.configure do |config|
+        config.version = 1
         config.creator_url = 'http://example.com'
       end
-      expect(Trundle.config.creator_url).to eq('http://example.com')
     end
 
-    it 'TODO: fresh config for every spec' do
-      expect(Trundle.config.version).not_to eq(2)
+    it 'writes config values' do
+      expect(Trundle.config.version).to eq(1)
+      expect(Trundle.config.creator_url).to eq('http://example.com')
     end
   end
 end
