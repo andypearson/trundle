@@ -2,7 +2,7 @@ RSpec.describe Trundle::TextBundle do
   let(:text_bundle) { described_class.new(text_bundle_path) }
   let(:text_bundle_path) { 'spec/tmp/example.textbundle' }
 
-  context 'Reading a TextBundle' do
+  describe 'Reading a TextBundle' do
     let(:content) { File.read(text_bundle_path + '/text.markdown') }
     let(:text_bundle_path) { 'spec/samples/offical-v2.textbundle' }
 
@@ -35,7 +35,7 @@ RSpec.describe Trundle::TextBundle do
     end
   end
 
-  context 'Writing a TextBundle' do
+  describe 'Writing a TextBundle' do
     it 'does not exist' do
       expect(text_bundle).not_to exist
     end
@@ -148,6 +148,16 @@ RSpec.describe Trundle::TextBundle do
         text_bundle.close
 
         expect(described_class.new(text_bundle_path).type).to eq('net.daringfireball.markdown')
+      end
+    end
+  end
+
+  describe 'Accessors' do
+    describe '#transient=' do
+      it 'raises an error when the value is not a boolean' do
+        [[], '', nil, {}].each do |value|
+          expect{ text_bundle.transient = value }.to raise_error(ArgumentError, 'transient must be a boolean')
+        end
       end
     end
   end

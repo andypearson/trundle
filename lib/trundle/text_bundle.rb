@@ -5,6 +5,7 @@ class Trundle::TextBundle
     :creator_identifier,
     :creator_url,
     :source_url,
+    :transient,
     :type,
     :version
   )
@@ -38,12 +39,11 @@ class Trundle::TextBundle
     @text_store.write
   end
 
-  # TODO: raise exception when transient is not being set to a boolean
   def transient=(value)
-    !!value
+    raise ArgumentError, 'transient must be a boolean' unless !!value == value
+    info['transient'] = value
   end
 
-  # TODO: add a standard accessor for transient as well (for consistency)
   def transient?
     !!info['transient']
   end

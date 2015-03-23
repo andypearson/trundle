@@ -13,5 +13,8 @@ class Trundle::Config
     @transient = false
   end
 
-  # TODO: raise exception when transient is not being set to a boolean
+  def transient=(value)
+    raise ArgumentError, 'transient must be a boolean' unless !!value == value
+    @transient = value
+  end
 end

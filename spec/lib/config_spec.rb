@@ -43,6 +43,12 @@ RSpec.describe Trundle::Config do
     it 'is set' do
       expect(config.transient).to eq(transient)
     end
+
+    it 'raises an error when the value is not a boolean' do
+      [[], '', nil, {}].each do |value|
+        expect{ config.transient = value }.to raise_error(ArgumentError, 'transient must be a boolean')
+      end
+    end
   end
 
   describe 'creator_url' do
