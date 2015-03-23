@@ -1,8 +1,11 @@
+require 'trundle/version'
+require 'trundle/info_accessors'
+
 require 'trundle/config'
 require 'trundle/info_store'
+require 'trundle/key'
 require 'trundle/text_bundle'
 require 'trundle/text_store'
-require 'trundle/version'
 
 class Trundle
   def self.open(path)

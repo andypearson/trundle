@@ -1,4 +1,13 @@
 class Trundle::TextBundle
+  extend Trundle::InfoAccessors
+
+  info_accessors(
+    :version,
+    :source_url,
+    :creator_url,
+    :creator_identifier
+  )
+
   def initialize(path)
     @path = path
     @info_store = Trundle::InfoStore.new(File.join(@path, 'info.json'))
@@ -36,38 +45,6 @@ class Trundle::TextBundle
   # TODO: add a standard accessor for transient as well (for consistency)
   def transient?
     !!info['transient']
-  end
-
-  def version=(value)
-    info['version'] = value
-  end
-
-  def version
-    info['version']
-  end
-
-  def source_url=(value)
-    info['sourceURL'] = value
-  end
-
-  def source_url
-    info['sourceURL']
-  end
-
-  def creator_url=(value)
-    info['creatorURL'] = value
-  end
-
-  def creator_url
-    info['creatorURL']
-  end
-
-  def creator_identifier=(value)
-    info['creatorIdentifier'] = value
-  end
-
-  def creator_identifier
-    info['creatorIdentifier']
   end
 
   private
