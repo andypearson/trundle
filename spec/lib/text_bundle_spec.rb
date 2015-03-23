@@ -115,32 +115,39 @@ RSpec.describe Trundle::TextBundle do
         expect(described_class.new(text_bundle_path)).not_to be_transient
       end
 
-      it 'writes the version' do
+      it 'changes the version' do
         text_bundle.version = 2
         text_bundle.close
 
         expect(described_class.new(text_bundle_path).version).to eq(2)
       end
 
-      it 'reads the creator URL' do
+      it 'changes the creator URL' do
         text_bundle.creator_url = 'file:///Applications/Example.app/'
         text_bundle.close
 
         expect(described_class.new(text_bundle_path).creator_url).to eq('file:///Applications/Example.app/')
       end
 
-      it 'reads the creator identifier' do
+      it 'changes the creator identifier' do
         text_bundle.creator_identifier = 'com.example.editor'
         text_bundle.close
 
         expect(described_class.new(text_bundle_path).creator_identifier).to eq('com.example.editor')
       end
 
-      it 'reads the source URL' do
+      it 'changes the source URL' do
         text_bundle.source_url = 'file:///Users/johndoe/Documents/myfile.markdown/'
         text_bundle.close
 
         expect(described_class.new(text_bundle_path).source_url).to eq('file:///Users/johndoe/Documents/myfile.markdown/')
+      end
+
+      it 'changes the type' do
+        text_bundle.type = 'net.daringfireball.markdown'
+        text_bundle.close
+
+        expect(described_class.new(text_bundle_path).type).to eq('net.daringfireball.markdown')
       end
     end
   end

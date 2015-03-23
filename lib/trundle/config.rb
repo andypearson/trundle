@@ -1,11 +1,11 @@
 class Trundle::Config
   attr_accessor(
-    :version,
-    :transient,
+    :creator_identifier,
     :creator_url,
     :source_url,
-    :creator_identifier,
-    :type
+    :transient,
+    :type,
+    :version
   )
 
   def initialize

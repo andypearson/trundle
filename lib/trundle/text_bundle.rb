@@ -2,10 +2,11 @@ class Trundle::TextBundle
   extend Trundle::InfoAccessors
 
   info_accessors(
-    :version,
-    :source_url,
+    :creator_identifier,
     :creator_url,
-    :creator_identifier
+    :source_url,
+    :type,
+    :version
   )
 
   def initialize(path)
