@@ -17,4 +17,25 @@ class Trundle::Config
     raise ArgumentError, 'transient must be a boolean' unless !!value == value
     @transient = value
   end
+
+  def to_h
+    hash = {}
+    keys.each do |key|
+      value = send(key)
+      hash[Trundle::Key.new(key).camelize] = value if !value.nil?
+    end
+    hash
+  end
+
+  private
+  def keys
+    [
+      :creator_identifier,
+      :creator_url,
+      :source_url,
+      :transient,
+      :type,
+      :version
+    ]
+  end
 end

@@ -1,7 +1,7 @@
 module Trundle::InfoAccessors
   def info_accessors(*args)
     args.each do |arg|
-      key = Trundle::Key.new(arg.to_s).camelize
+      key = Trundle::Key.new(arg).camelize
 
       define_method(arg) do
         info[key]

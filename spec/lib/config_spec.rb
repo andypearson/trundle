@@ -19,6 +19,10 @@ RSpec.describe Trundle::Config do
     it 'is set' do
       expect(config.version).to eq(version)
     end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('version' => version)
+    end
   end
 
   describe 'type' do
@@ -31,6 +35,10 @@ RSpec.describe Trundle::Config do
     it 'is set' do
       expect(config.type).to eq(type)
     end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('type' => type)
+    end
   end
 
   describe 'transient' do
@@ -42,6 +50,10 @@ RSpec.describe Trundle::Config do
 
     it 'is set' do
       expect(config.transient).to eq(transient)
+    end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('transient' => transient)
     end
 
     it 'raises an error when the value is not a boolean' do
@@ -61,6 +73,10 @@ RSpec.describe Trundle::Config do
     it 'is set' do
       expect(config.creator_url).to eq(creator_url)
     end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('creatorURL' => creator_url)
+    end
   end
 
   describe 'creator_identifier' do
@@ -73,6 +89,10 @@ RSpec.describe Trundle::Config do
     it 'is set' do
       expect(config.creator_identifier).to eq(creator_identifier)
     end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('creatorIdentifier' => creator_identifier)
+    end
   end
 
   describe 'source_url' do
@@ -84,6 +104,10 @@ RSpec.describe Trundle::Config do
 
     it 'is set' do
       expect(config.source_url).to eq(source_url)
+    end
+
+    it 'is included in the hash' do
+      expect(config.to_h).to include('sourceURL' => source_url)
     end
   end
 end

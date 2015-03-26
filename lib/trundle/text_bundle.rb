@@ -15,6 +15,8 @@ class Trundle::TextBundle
     @info_store = Trundle::InfoStore.new(File.join(@path, 'info.json'))
     @text_store = Trundle::TextStore.new(File.join(@path, 'text.markdown'))
 
+    @info_store.content = Trundle.config.to_h unless exist?
+
     if block_given?
       yield(self)
       close

@@ -1,6 +1,6 @@
 class Trundle::Key
-  def initialize(original_key)
-    @fragments = original_key.split('_')
+  def initialize(key)
+    @fragments = key.to_s.split('_')
   end
 
   def camelize

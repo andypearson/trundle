@@ -5,6 +5,10 @@ class Trundle::InfoStore
     @path = path
   end
 
+  def content=(value)
+    @content = value
+  end
+
   def content
     @content ||= JSON.parse(File.read(@path))
   rescue

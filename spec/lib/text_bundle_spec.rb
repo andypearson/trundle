@@ -33,6 +33,20 @@ RSpec.describe Trundle::TextBundle do
     it 'reads the source URL' do
       expect(text_bundle.source_url).to eq('file:///Users/johndoe/Documents/myfile.markdown/')
     end
+
+    context 'when configuration options are set' do
+      let(:text_bundle_path) { 'spec/samples/blank.textbundle' }
+
+      before do
+        Trundle.configure do |config|
+          config.version = 3
+        end
+      end
+
+      it 'does not merge in the config' do
+        expect(text_bundle.version).not_to eq(3)
+      end
+    end
   end
 
   describe 'Writing a TextBundle' do
@@ -73,6 +87,18 @@ RSpec.describe Trundle::TextBundle do
 
       it 'exists' do
         expect(text_bundle).to exist
+      end
+    end
+
+    context 'when configuration options are set' do
+      before do
+        Trundle.configure do |config|
+          config.version = 3
+        end
+      end
+
+      it 'merges in the config' do
+        expect(text_bundle.version).to eq(3)
       end
     end
   end
