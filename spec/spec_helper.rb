@@ -94,7 +94,12 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
+    reset_config
     clean_up_tmp_text_bundles
+  end
+
+  def reset_config
+    Trundle.remove_instance_variable(:@config) if Trundle.instance_variable_defined?(:@config)
   end
 
   def clean_up_tmp_text_bundles
