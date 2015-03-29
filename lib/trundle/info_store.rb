@@ -11,7 +11,7 @@ class Trundle::InfoStore
 
   def content
     @content ||= JSON.parse(File.read(@path))
-  rescue
+  rescue Errno::ENOENT
     @content = {}
   end
 

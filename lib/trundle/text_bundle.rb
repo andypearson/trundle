@@ -50,6 +50,13 @@ class Trundle::TextBundle
     !!info['transient']
   end
 
+  def method_missing(name, *args, &block)
+    if Trundle.config.namespace?(name)
+      key = info[Trundle.config.namespace_key(name)]
+      OpenStruct.new(key)
+    end
+  end
+
   private
   def info
     @info_store.content

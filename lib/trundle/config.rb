@@ -13,6 +13,18 @@ class Trundle::Config
     @transient = false
   end
 
+  def namespace?(name)
+    namespace_list.include?(name)
+  end
+
+  def namespace_key(name)
+    namespace_list.key(name)
+  end
+
+  def namespaces(&block)
+    namespace_list.instance_eval(&block)
+  end
+
   def transient=(value)
     raise ArgumentError, 'transient must be a boolean' unless !!value == value
     @transient = value
@@ -37,5 +49,9 @@ class Trundle::Config
       :type,
       :version
     ]
+  end
+
+  def namespace_list
+    @namespace_list ||= Trundle::NamespaceList.new
   end
 end
