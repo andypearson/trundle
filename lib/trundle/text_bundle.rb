@@ -51,14 +51,20 @@ class Trundle::TextBundle
   end
 
   def method_missing(name, *args, &block)
-    if Trundle.config.namespace?(name)
-      key = info[Trundle.config.namespace_key(name)]
-      OpenStruct.new(key)
-    end
+    namespace_object_for(name) if Trundle.config.namespace?(name)
   end
 
   private
   def info
     @info_store.content
+  end
+
+  def namespace_object_for(name)
+    var = "@#{name}"
+    if !instance_variable_defined?(var)
+      key = info[Trundle.config.namespace_key(name)]
+      instance_variable_set(var, OpenStruct.new(key))
+    end
+    instance_variable_get(var)
   end
 end
