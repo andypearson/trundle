@@ -50,8 +50,9 @@ class Trundle::TextBundle
     !!info['transient']
   end
 
+  # TODO: raise an error if the namespace does not exist
   def method_missing(name, *args, &block)
-    namespace_object_for(name) if Trundle.config.namespace?(name)
+    namespaced_attributes_for(name) if Trundle.config.namespace?(name)
   end
 
   private
@@ -59,11 +60,11 @@ class Trundle::TextBundle
     @info_store.content
   end
 
-  def namespace_object_for(name)
+  def namespaced_attributes_for(name)
     var = "@#{name}"
     if !instance_variable_defined?(var)
       key = info[Trundle.config.namespace_key(name)]
-      instance_variable_set(var, OpenStruct.new(key))
+      instance_variable_set(var, Trundle::NamespacedAttributes.new(key))
     end
     instance_variable_get(var)
   end

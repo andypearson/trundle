@@ -5,6 +5,7 @@ require 'trundle/config'
 require 'trundle/info_store'
 require 'trundle/key'
 require 'trundle/namespace_list'
+require 'trundle/namespaced_attributes'
 require 'trundle/text_bundle'
 require 'trundle/text_store'
 

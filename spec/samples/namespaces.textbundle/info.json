@@ -1,7 +1,8 @@
 {
   "version": 2,
   "io.monkeyisland": {
-    "version": 1
+    "version": 1,
+    "localCastaway": "Herman Toothrot"
   },
   "io.scabbisland": {
     "version": 6

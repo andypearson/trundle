@@ -11,7 +11,6 @@ RSpec.describe Trundle::TextBundle do
       end
     end
 
-
     describe 'Namespaces' do
       describe 'Reading' do
         let(:text_bundle_path) { 'spec/samples/namespaces.textbundle' }
@@ -19,13 +18,16 @@ RSpec.describe Trundle::TextBundle do
         it 'always returns the same namespace object' do
           expect(text_bundle.monkey_island).to equal(text_bundle.monkey_island)
         end
-        
+
         it 'reads attributes from the namespaces' do
           expect(text_bundle.monkey_island.version).to eq(1)
           expect(text_bundle.scabb_island.version).to eq(6)
         end
+
+        it 'reads underscored attributes' do
+          expect(text_bundle.monkey_island.local_castaway).to eq('Herman Toothrot')
+        end
       end
     end
   end
-
 end
