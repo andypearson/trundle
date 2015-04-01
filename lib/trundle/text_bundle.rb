@@ -37,6 +37,7 @@ class Trundle::TextBundle
 
   def close
     Dir.mkdir(@path) unless exist?
+    write_namespaces
     @info_store.write
     @text_store.write
   end
@@ -63,9 +64,15 @@ class Trundle::TextBundle
   def namespaced_attributes_for(name)
     var = "@#{name}"
     if !instance_variable_defined?(var)
-      key = info[Trundle.config.namespace_key(name)]
-      instance_variable_set(var, Trundle::NamespacedAttributes.new(key))
+      attributes = info[Trundle.config.namespace_key(name)] || {}
+      instance_variable_set(var, Trundle::NamespacedAttributes.new(attributes))
     end
     instance_variable_get(var)
+  end
+
+  def write_namespaces
+    Trundle.config.namespaces.each do |name, key|
+      info[key] = namespaced_attributes_for(name).to_h
+    end
   end
 end

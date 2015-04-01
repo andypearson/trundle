@@ -22,7 +22,11 @@ class Trundle::Config
   end
 
   def namespaces(&block)
-    namespace_list.instance_eval(&block)
+    if block_given?
+      namespace_list.instance_eval(&block)
+    else
+      namespace_list.all
+    end
   end
 
   def transient=(value)

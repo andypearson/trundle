@@ -11,6 +11,10 @@ class Trundle::NamespaceList
     @namespaces[name.to_sym]
   end
 
+  def all
+    @namespaces
+  end
+
   def method_missing(name, *args, &block)
     @namespaces[name.to_sym] = args[0]
   end
