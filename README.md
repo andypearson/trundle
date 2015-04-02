@@ -156,6 +156,7 @@ my_document.close
 
 ## Next things
 
+- TODO: rubocop the code
 - TODO: add support for assets
 - TODO: could the configuration DSL be more succinct?
 - TODO: default values for namespaces?

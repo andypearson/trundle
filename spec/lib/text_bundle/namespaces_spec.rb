@@ -27,6 +27,21 @@ RSpec.describe Trundle::TextBundle do
       it 'reads underscored attributes' do
         expect(text_bundle.monkey_island.local_castaway).to eq('Herman Toothrot')
       end
+
+      it 'raises an error if the namespace has not been defined' do
+        message = <<-STRING.gsub(/^ {10}/, '').strip
+          The namespace "melee_island" is not defined!
+
+          Add it to your config using:
+
+          Trundle.configure do |config|
+            config.namespaces do
+              melee_island 'unique.namespace.key'
+            end
+          end
+        STRING
+        expect{ text_bundle.melee_island }.to raise_error(Trundle::NamespaceNotDefined, message)
+      end
     end
 
     describe 'Writing' do

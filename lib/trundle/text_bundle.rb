@@ -51,9 +51,12 @@ class Trundle::TextBundle
     !!info['transient']
   end
 
-  # TODO: raise an error if the namespace does not exist
   def method_missing(name, *args, &block)
-    namespaced_attributes_for(name) if Trundle.config.namespace?(name)
+    if Trundle.config.namespace?(name)
+      namespaced_attributes_for(name)
+    else
+      raise Trundle::NamespaceNotDefined, namespace_not_defined_message(name)
+    end
   end
 
   private
@@ -74,5 +77,19 @@ class Trundle::TextBundle
     Trundle.config.namespaces.each do |name, key|
       info[key] = namespaced_attributes_for(name).to_h
     end
+  end
+
+  def namespace_not_defined_message(name)
+    <<-STRING.gsub(/^ {6}/, '').strip
+      The namespace "#{name}" is not defined!
+
+      Add it to your config using:
+
+      Trundle.configure do |config|
+        config.namespaces do
+          #{name} 'unique.namespace.key'
+        end
+      end
+    STRING
   end
 end

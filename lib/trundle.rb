@@ -10,6 +10,9 @@ require 'trundle/text_bundle'
 require 'trundle/text_store'
 
 class Trundle
+
+  class NamespaceNotDefined < StandardError; end
+
   def self.open(path)
     if block_given?
       TextBundle.new(path, &Proc.new)
