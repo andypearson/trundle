@@ -9,16 +9,13 @@ require 'trundle/namespaced_attributes'
 require 'trundle/text_bundle'
 require 'trundle/text_store'
 
-class Trundle
+module Trundle
 
   class NamespaceNotDefined < StandardError; end
 
   def self.open(path)
-    if block_given?
-      TextBundle.new(path, &Proc.new)
-    else
-      TextBundle.new(path)
-    end
+    return TextBundle.new(path, &Proc.new) if block_given?
+    TextBundle.new(path)
   end
 
   def self.configure
