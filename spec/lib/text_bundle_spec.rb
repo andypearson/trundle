@@ -8,6 +8,10 @@ RSpec.describe Trundle::TextBundle do
       expect(text_bundle).to exist
     end
 
+    it 'has a path' do
+      expect(text_bundle.path).to eq(text_bundle_path)
+    end
+
     context 'when configuration options are set' do
       let(:text_bundle_path) { 'spec/samples/blank.textbundle' }
 

@@ -1,6 +1,7 @@
 class Trundle::TextBundle
   extend Trundle::InfoAccessors
 
+  attr_reader :path
   info_accessors(
     :creator_identifier,
     :creator_url,
