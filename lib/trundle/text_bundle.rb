@@ -15,6 +15,7 @@ class Trundle::TextBundle
     @path = path
     @info_store = Trundle::InfoStore.new(File.join(@path, 'info.json'))
     @text_store = Trundle::TextStore.new(File.join(@path, 'text.markdown'))
+    @asset_store = Trundle::AssetStore.new(File.join(@path, 'assets'))
 
     @info_store.content = Trundle.config.to_h unless exist?
 
@@ -34,6 +35,10 @@ class Trundle::TextBundle
 
   def text=(value)
     @text_store.content = value
+  end
+
+  def assets
+    @asset_store
   end
 
   def close

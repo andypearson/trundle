@@ -1,6 +1,7 @@
 require 'trundle/version'
 require 'trundle/info_accessors'
 
+require 'trundle/asset_store'
 require 'trundle/config'
 require 'trundle/info_store'
 require 'trundle/key'
